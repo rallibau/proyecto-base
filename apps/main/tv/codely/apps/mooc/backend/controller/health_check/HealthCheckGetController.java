@@ -1,5 +1,7 @@
 package tv.codely.apps.mooc.backend.controller.health_check;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,6 +23,9 @@ public final class HealthCheckGetController extends ApiController {
 
     @GetMapping("/health-check")
     public HashMap<String, String> index() {
+        Logger logger = LogManager.getLogger("rallibau");
+        RuntimeException error = new RuntimeException("exceptioooon");
+        logger.error("hola mon",error);
         HashMap<String, String> status = new HashMap<>();
         status.put("application", "mooc_backend");
         status.put("status", "ok");

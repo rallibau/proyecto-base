@@ -36,6 +36,16 @@ services:
       - 9200:9200
     environment:
       - discovery.type=single-node
+  logstash:
+    image: docker.elastic.co/logstash/logstash:6.8.4
+    container_name: logstash
+    environment:
+      - "ELASTIC_PASSWORD=elastic"
+    ports: [ '9600:9600' ]
+    depends_on: [ 'elasticsearch' ]
+    volumes:
+      - './etc/logstash/pipeline:/usr/share/logstash/pipeline'
+      - './var/logs:/logs'
 
   java:
     container_name: codelytv-ddd_skeleton-java
